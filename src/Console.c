@@ -7,7 +7,7 @@
 #include "Console.h"
 
 
-static const char *reset_console_effects = "\e[0m";
+// static const char *reset_console_effects = "\x1b[0m";
 static const short UNDEFINED_SIZE = -1;
 
 static short rowsNum = UNDEFINED_SIZE;
@@ -15,7 +15,7 @@ static short colsNum = UNDEFINED_SIZE;
 
 
 void change_bg_color(const Colors newColor) {
-    char changer[] = "\e[4?m";
+    char changer[] = "\x1b[4?m";
 
     changer[3] = 48 + newColor; // 48 == '0'
 
@@ -23,7 +23,7 @@ void change_bg_color(const Colors newColor) {
 }
 
 void change_sym_color(const Colors newColor, const Intensities newIntensity) {
-    char changer[] = "\e[3?;?m";
+    char changer[] = "\x1b[3?;?m";
 
     changer[3] = 48 + newColor; // 48 == '0'
     changer[5] = 48 + newIntensity;
