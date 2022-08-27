@@ -8,5 +8,5 @@ typedef enum {
     BRIGHT = 1, NORMAL
 } Intensities;
 
-void ChangeBgColor(const Colors newColor);
-void ChangeSymColor(const Colors newColor, const Intensities newIntensity);
+void change_bg_color(const Colors newColor);
+void change_sym_color(const Colors newColor, const Intensities newIntensity);

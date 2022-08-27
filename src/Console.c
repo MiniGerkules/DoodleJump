@@ -4,7 +4,7 @@
 
 static const char *resetEffects = "\e[0m";
 
-void ChangeBgColor(const Colors newColor) {
+void change_bg_color(const Colors newColor) {
     char changer[] = "\e[4?m";
 
     changer[3] = 48 + newColor; // 48 == '0'
@@ -12,7 +12,7 @@ void ChangeBgColor(const Colors newColor) {
     printf("%s", changer);
 }
 
-void ChangeSymColor(const Colors newColor, const Intensities newIntensity) {
+void change_sym_color(const Colors newColor, const Intensities newIntensity) {
     char changer[] = "\e[3?;?m";
 
     changer[3] = 48 + newColor; // 48 == '0'
