@@ -1,8 +1,18 @@
 #include <stdio.h>
-#include <string.h>
+#include <unistd.h>
+
+#include <termios.h>
+#include <sys/ioctl.h>
+
 #include "Console.h"
 
-static const char *resetEffects = "\e[0m";
+
+static const char *reset_console_effects = "\e[0m";
+static const short UNDEFINED_SIZE = -1;
+
+static short rowsNum = UNDEFINED_SIZE;
+static short colsNum = UNDEFINED_SIZE;
+
 
 void change_bg_color(const Colors newColor) {
     char changer[] = "\e[4?m";
@@ -19,4 +29,17 @@ void change_sym_color(const Colors newColor, const Intensities newIntensity) {
     changer[5] = 48 + newIntensity;
 
     printf("%s", changer);
+}
+
+
+static void set_sizes_of_teminal(void) {
+    struct winsize size;
+
+    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &size)) {
+        rowsNum = UNDEFINED_SIZE;
+        colsNum = UNDEFINED_SIZE;
+    } else {
+        rowsNum = size.ws_row;
+        colsNum = size.ws_col;
+    }
 }
