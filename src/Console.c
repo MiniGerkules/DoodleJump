@@ -8,9 +8,7 @@
 
 
 static const short UNDEFINED_SIZE = -1;
-
-static short rowsNum = UNDEFINED_SIZE;
-static short colsNum = UNDEFINED_SIZE;
+ConsoleSize console_size = { UNDEFINED_SIZE, UNDEFINED_SIZE };
 
 
 void change_bg_color(const Colors newColor) {
@@ -35,7 +33,8 @@ void console_effects_reset(void) {
 }
 
 bool is_console_sizes_valid(void) {
-    return rowsNum != UNDEFINED_SIZE || colsNum != UNDEFINED_SIZE;
+    return console_size.rowsNum != UNDEFINED_SIZE &&
+           console_size.colsNum != UNDEFINED_SIZE;
 }
 
 static void set_sizes_of_teminal(void);
@@ -50,10 +49,10 @@ static void set_sizes_of_teminal(void) {
     struct winsize size;
 
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &size)) {
-        rowsNum = UNDEFINED_SIZE;
-        colsNum = UNDEFINED_SIZE;
+        console_size.rowsNum = UNDEFINED_SIZE;
+        console_size.colsNum = UNDEFINED_SIZE;
     } else {
-        rowsNum = size.ws_row;
-        colsNum = size.ws_col;
+        console_size.rowsNum = size.ws_row;
+        console_size.colsNum = size.ws_col;
     }
 }
