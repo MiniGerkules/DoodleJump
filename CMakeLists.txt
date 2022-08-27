@@ -3,11 +3,13 @@ project(DoodleJump LANGUAGES C)
 
 set(HEADERS
     src/Console.h
+    src/Cursor.h
     # src/Doodle.h
     src/Game.h
 )
 set(SOURCES
     src/Console.c
+    src/Cursor.c
     # src/Doodle.c
     src/Game.c
     src/main.c
