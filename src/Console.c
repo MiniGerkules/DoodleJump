@@ -14,7 +14,7 @@ ConsoleSize console_size = { UNDEFINED_SIZE, UNDEFINED_SIZE };
 void change_bg_color(const Colors newColor) {
     char changer[] = "\x1b[4?m";
 
-    changer[3] = 48 + newColor; // 48 == '0'
+    changer[3] = '0' + newColor;
 
     printf("%s", changer);
 }
@@ -22,8 +22,8 @@ void change_bg_color(const Colors newColor) {
 void change_sym_color(const Colors newColor, const Intensities newIntensity) {
     char changer[] = "\x1b[3?;?m";
 
-    changer[3] = 48 + newColor; // 48 == '0'
-    changer[5] = 48 + newIntensity;
+    changer[3] = '0' + newColor;
+    changer[5] = '0' + newIntensity;
 
     printf("%s", changer);
 }
