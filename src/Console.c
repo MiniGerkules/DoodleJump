@@ -7,7 +7,6 @@
 #include "Console.h"
 
 
-// static const char *reset_console_effects = "\x1b[0m";
 static const short UNDEFINED_SIZE = -1;
 
 static short rowsNum = UNDEFINED_SIZE;
@@ -29,6 +28,10 @@ void change_sym_color(const Colors newColor, const Intensities newIntensity) {
     changer[5] = 48 + newIntensity;
 
     printf("%s", changer);
+}
+
+void console_effects_reset(void) {
+    printf("\x1b[0m");
 }
 
 static void set_sizes_of_teminal(void);
