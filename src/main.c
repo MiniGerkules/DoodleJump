@@ -12,7 +12,7 @@ void terminate_program(const char *msg);
 int main(void) {
     if (!set_signals_handlers())
         terminate_program("ERROR! Can't set signals handlers!");
-    else if (!all_right_with_console())
+    else if (!set_console_sizes())
         terminate_program("ERROR! Can't get the size of console!");
 
     return 0;

@@ -7,36 +7,32 @@
 #include "Console.h"
 
 
-// static const char *reset_console_effects = "\x1b[0m";
 static const short UNDEFINED_SIZE = -1;
-
-static short rowsNum = UNDEFINED_SIZE;
-static short colsNum = UNDEFINED_SIZE;
+ConsoleSize console_size = { UNDEFINED_SIZE, UNDEFINED_SIZE };
 
 
 void change_bg_color(const Colors newColor) {
-    char changer[] = "\x1b[4?m";
-
-    changer[3] = 48 + newColor; // 48 == '0'
-
-    printf("%s", changer);
+    printf("%s%d%c", "\x1b[4", newColor, 'm');
 }
 
 void change_sym_color(const Colors newColor, const Intensities newIntensity) {
-    char changer[] = "\x1b[3?;?m";
+    printf("%s%d%c%d%c", "\x1b[3", newColor, ';', newIntensity, 'm');
+}
 
-    changer[3] = 48 + newColor; // 48 == '0'
-    changer[5] = 48 + newIntensity;
+void console_effects_reset(void) {
+    printf("\x1b[0m");
+}
 
-    printf("%s", changer);
+bool is_console_sizes_valid(void) {
+    return console_size.rowsNum != UNDEFINED_SIZE &&
+           console_size.colsNum != UNDEFINED_SIZE;
 }
 
 static void set_sizes_of_teminal(void);
-bool all_right_with_console(void) {
-    if (rowsNum != UNDEFINED_SIZE || colsNum != UNDEFINED_SIZE)
-        set_sizes_of_teminal();
+bool set_console_sizes(void) {
+    set_sizes_of_teminal();
 
-    return rowsNum != UNDEFINED_SIZE && colsNum != UNDEFINED_SIZE;
+    return is_console_sizes_valid();
 }
 
 
@@ -44,10 +40,10 @@ static void set_sizes_of_teminal(void) {
     struct winsize size;
 
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &size)) {
-        rowsNum = UNDEFINED_SIZE;
-        colsNum = UNDEFINED_SIZE;
+        console_size.rowsNum = UNDEFINED_SIZE;
+        console_size.colsNum = UNDEFINED_SIZE;
     } else {
-        rowsNum = size.ws_row;
-        colsNum = size.ws_col;
+        console_size.rowsNum = size.ws_row;
+        console_size.colsNum = size.ws_col;
     }
 }
