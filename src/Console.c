@@ -34,12 +34,15 @@ void console_effects_reset(void) {
     printf("\x1b[0m");
 }
 
-static void set_sizes_of_teminal(void);
-bool all_right_with_console(void) {
-    if (rowsNum != UNDEFINED_SIZE || colsNum != UNDEFINED_SIZE)
-        set_sizes_of_teminal();
+bool is_console_sizes_valid(void) {
+    return rowsNum != UNDEFINED_SIZE || colsNum != UNDEFINED_SIZE;
+}
 
-    return rowsNum != UNDEFINED_SIZE && colsNum != UNDEFINED_SIZE;
+static void set_sizes_of_teminal(void);
+bool set_console_sizes(void) {
+    set_sizes_of_teminal();
+
+    return is_sizes_valid();
 }
 
 

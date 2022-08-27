@@ -15,4 +15,5 @@ void change_bg_color(const Colors newColor);
 void change_sym_color(const Colors newColor, const Intensities newIntensity);
 void console_effects_reset(void);
 
-bool all_right_with_console(void);
+bool is_console_sizes_valid(void);
+bool set_console_sizes(void);
