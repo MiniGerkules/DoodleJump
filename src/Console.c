@@ -12,20 +12,11 @@ ConsoleSize console_size = { UNDEFINED_SIZE, UNDEFINED_SIZE };
 
 
 void change_bg_color(const Colors newColor) {
-    char changer[] = "\x1b[4?m";
-
-    changer[3] = '0' + newColor;
-
-    printf("%s", changer);
+    printf("%s%d%c", "\x1b[4", newColor, 'm');
 }
 
 void change_sym_color(const Colors newColor, const Intensities newIntensity) {
-    char changer[] = "\x1b[3?;?m";
-
-    changer[3] = '0' + newColor;
-    changer[5] = '0' + newIntensity;
-
-    printf("%s", changer);
+    printf("%s%d%c%d%c", "\x1b[3", newColor, ';', newIntensity, 'm');
 }
 
 void console_effects_reset(void) {
@@ -41,7 +32,7 @@ static void set_sizes_of_teminal(void);
 bool set_console_sizes(void) {
     set_sizes_of_teminal();
 
-    return is_sizes_valid();
+    return is_console_sizes_valid();
 }
 
 
