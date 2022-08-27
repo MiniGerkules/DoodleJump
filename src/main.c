@@ -1,12 +1,19 @@
-#include <stdbool.h>
+#include <stdio.h>
 #include <signal.h>
 #include <string.h>
+#include <stdlib.h>
+
 #include "Game.h"
+#include "Console.h"
 
 bool set_signals_handlers(void);
+void terminate_program(const char *msg);
 
 int main(void) {
-    set_signals_handlers();
+    if (!set_signals_handlers())
+        terminate_program("ERROR! Can't set signals handlers!");
+    else if (!all_right_with_console())
+        terminate_program("ERROR! Can't get the size of console!");
 
     return 0;
 }
@@ -22,6 +29,15 @@ bool set_signals_handlers(void) {
     act.sa_handler = stop_the_game;
     act.sa_mask = blocked;
 
-    sigaction(SIGINT, &act, 0);
-    sigaction(SIGTERM, &act, 0);
+    bool setted = true;
+    setted = setted && !sigaction(SIGINT, &act, 0);
+    setted = setted && !sigaction(SIGTERM, &act, 0);
+
+    return setted;
+}
+
+void terminate_program(const char *msg) {
+    change_sym_color(RED, BRIGHT);
+    puts(msg);
+    exit(EXIT_FAILURE);
 }
