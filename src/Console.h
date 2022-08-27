@@ -1,4 +1,5 @@
 #pragma once
+#include <stdbool.h>
 
 typedef enum {
     BLACK = 0, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
@@ -10,3 +11,4 @@ typedef enum {
 
 void change_bg_color(const Colors newColor);
 void change_sym_color(const Colors newColor, const Intensities newIntensity);
+bool all_right_with_console(void);

@@ -31,6 +31,14 @@ void change_sym_color(const Colors newColor, const Intensities newIntensity) {
     printf("%s", changer);
 }
 
+static void set_sizes_of_teminal(void);
+bool all_right_with_console(void) {
+    if (rowsNum != UNDEFINED_SIZE || colsNum != UNDEFINED_SIZE)
+        set_sizes_of_teminal();
+
+    return rowsNum != UNDEFINED_SIZE && colsNum != UNDEFINED_SIZE;
+}
+
 
 static void set_sizes_of_teminal(void) {
     struct winsize size;
