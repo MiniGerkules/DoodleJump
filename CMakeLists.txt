@@ -13,4 +13,5 @@ set(SOURCES
     src/main.c
 )
 
+add_compile_options(-Wall -Wextra -pedantic -Werror)
 add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
