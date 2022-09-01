@@ -36,9 +36,6 @@ void move_cursor(const short rowBias, const short columnBias) {
         printf("%s%d%c", "\x1b[", -columnBias, 'D');
 }
 
-/*  CSI ?25l
-    CSI ?25h */
-
 void hide_cursor(void) {
     printf("\x1b[?25l");
 }
