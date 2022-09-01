@@ -4,7 +4,7 @@
 #include <termios.h>
 #include <sys/ioctl.h>
 
-#include "Console.h"
+#include "MainOptions.h"
 
 
 static const short UNDEFINED_SIZE = -1;

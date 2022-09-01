@@ -1,5 +1,5 @@
 #pragma once
-#include "Console.h"
+#include "MainOptions.h"
 
 
 void set_cursor(const ushort newRow, const ushort newColumn);

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #include "Game.h"
-#include "Console.h"
+#include "Console/MainOptions.h"
 
 bool set_signals_handlers(void);
 void terminate_program(const char *msg);
